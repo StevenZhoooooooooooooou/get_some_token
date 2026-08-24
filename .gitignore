@@ -1,0 +1,10 @@
+.token
+.cookies
+.ua
+proxy.log
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+.aider*

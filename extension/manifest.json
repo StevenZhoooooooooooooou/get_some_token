@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "HopGPT Credential Keeper",
+  "version": "1.4.0",
+  "description": "Capture HopGPT credentials and relay chat requests through the browser to bypass Cloudflare.",
+  "permissions": [
+    "cookies"
+  ],
+  "host_permissions": [
+    "https://chat.ai.jh.edu/*",
+    "http://127.0.0.1:8787/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://chat.ai.jh.edu/*"],
+      "js": ["content.js"],
+      "run_at": "document_start",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["inject.js"],
+      "matches": ["https://chat.ai.jh.edu/*"]
+    }
+  ]
+}

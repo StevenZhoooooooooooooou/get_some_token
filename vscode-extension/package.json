@@ -1,0 +1,70 @@
+{
+  "name": "hopgpt-chat",
+  "displayName": "HopGPT Chat",
+  "description": "用 HopGPT 在 VS Code 聊天框里读代码、全自动改文件（复用 aider 的 SEARCH/REPLACE 协议，不依赖 tool calling）。",
+  "version": "0.1.0",
+  "publisher": "local",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "AI",
+    "Chat"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "chatParticipants": [
+      {
+        "id": "hopgpt-chat.hopgpt",
+        "name": "hopgpt",
+        "fullName": "HopGPT",
+        "description": "读代码、改文件（全自动）。例如：给 calc.py 加一个 subtract 函数",
+        "isSticky": true,
+        "disambiguation": [
+          {
+            "category": "hopgpt_edit",
+            "description": "The user wants HopGPT to read or edit files in the workspace, or answer questions about their code.",
+            "examples": [
+              "给 calc.py 加一个 subtract 函数",
+              "Add a subtract function to calc.py",
+              "重构 main.py 里的 hello 函数",
+              "解释一下这个项目是做什么的"
+            ]
+          }
+        ]
+      }
+    ],
+    "configuration": {
+      "title": "HopGPT Chat",
+      "properties": {
+        "hopgpt.proxyUrl": {
+          "type": "string",
+          "default": "http://127.0.0.1:8787",
+          "description": "HopGPT 本地代理地址（proxy.py 的地址）。"
+        },
+        "hopgpt.model": {
+          "type": "string",
+          "default": "claude-sonnet-4.5",
+          "description": "HopGPT 上游模型名。可选：claude-sonnet-4.5 / claude-opus / claude-sonnet / claude-haiku / gpt-5.5 / gpt-5.4 / gpt-5.4-mini / o3 / o3-mini / hopgpt。",
+          "enum": [
+            "claude-sonnet-4.5",
+            "claude-opus",
+            "claude-sonnet",
+            "claude-haiku",
+            "gpt-5.5",
+            "gpt-5.4",
+            "gpt-5.4-mini",
+            "gpt-5.4-nano",
+            "o3",
+            "o3-mini",
+            "hopgpt"
+          ]
+        }
+      }
+    }
+  }
+}
